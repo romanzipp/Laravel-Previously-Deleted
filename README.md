@@ -1,6 +1,10 @@
 # Laravel Previously Deleted
 
-This package stores attributes of deleted models.
+This package stores selected attributes of deleted models.
+
+## Why?
+
+> Todo
 
 ## Installation
 
@@ -30,4 +34,43 @@ Copy configuration to config folder:
 
 ```
 $ php artisan vendor:publish --provider=romanzipp\PreviouslyDeleted\Providers\PreviouslyDeletedProvider
+```
+
+## Usage
+
+This example shows the usage with a User model and stored "username" and "email" attributes.
+
+### Add Model Trait
+
+```php
+use romanzipp\PreviouslyDeleted\Traits\SavePreviouslyDeleted;
+
+class User extends Model
+{
+    use SavePreviouslyDeleted;
+
+    protected $storeDeleted = [
+        'username',
+        'email',
+    ];
+}
+```
+
+### Add Validation Rule
+
+```php
+public function store(Request $request)
+{
+    $request->validate([
+        'name' => ['required', 'not_deleted:users,username'],
+        'email' => ['required', 'not_deleted:users'],
+        'password' => ['required', 'min:6']
+    ]);
+
+    User::create([
+        'username' => $request->input('name'),
+        'email' => $request->input('email'),
+        'password' => bcrypt($request->input('password')),
+    ]);
+}
 ```
