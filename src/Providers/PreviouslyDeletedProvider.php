@@ -28,7 +28,6 @@ class PreviouslyDeletedProvider extends ServiceProvider
 
         Validator::extend('not_deleted', NotPreviouslyDeleted::class . '@validate');
         Validator::replacer('not_deleted', NotPreviouslyDeleted::class . '@message');
-
     }
 
     /**
