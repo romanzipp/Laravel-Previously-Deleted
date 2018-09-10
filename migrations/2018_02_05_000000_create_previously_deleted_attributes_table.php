@@ -18,7 +18,7 @@ class CreatePreviouslyDeletedAttributesTable extends Migration
         Schema::create($tableName, function (Blueprint $table) {
             $table->increments('id');
 
-            $table->morphs('subject');
+            $table->string('table');
 
             $table->string('attribute');
             $table->text('value');
