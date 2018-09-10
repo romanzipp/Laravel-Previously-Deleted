@@ -1,3 +1,5 @@
 <?php
 
-return [];
+return [
+    'table' => 'previously_deleted_attributes',
+];
