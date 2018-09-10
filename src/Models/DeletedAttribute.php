@@ -25,20 +25,6 @@ class DeletedAttribute extends Model
     }
 
     /**
-     * Find deleted Attribute by validation rule input.
-     * @param  string $attribute Attribute
-     * @param  string $table     Table name
-     * @return self|null
-     */
-    public static function findByRule(string $attribute, string $table)
-    {
-        return self::query()
-            ->where('table', $table)
-            ->where('attribute', $attribute)
-            ->first();
-    }
-
-    /**
      * Determine if attribute has been deleted previously.
      * @param  string $attribute Attribute
      * @param  string $table     Table name
@@ -47,11 +33,19 @@ class DeletedAttribute extends Model
      */
     public static function wasPreviouslyDeleted($attribute, $table, $value): bool
     {
-        if (!$deleted = self::findByRule($attribute, $table)) {
-            return false;
+        $deletedItems = self::query()
+            ->where('table', $table)
+            ->where('attribute', $attribute)
+            ->get();
+
+        foreach ($deletedItems as $deleted) {
+
+            if ($deleted->valueEquals($value)) {
+                return true;
+            }
         }
 
-        return $deleted->valueEquals($value);
+        return false;
     }
 
     /**
