@@ -14,6 +14,12 @@ trait SavePreviouslyDeleted
     {
         static::deleting(function ($subject) {
 
+            $ignoreSoftDeletes = config('previously-deleted.ignore_soft_deleted');
+
+            if (!$subject->forceDeleting && $ignoreSoftDeletes) {
+                return;
+            }
+
             $service = new PreviouslyDeleted($subject);
             $service->setAttributes((array) $subject->storeDeleted);
             $service->save();

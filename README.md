@@ -1,6 +1,6 @@
 # Laravel Previously Deleted
 
-This package stores selected attributes of deleted models.
+This package stores selected attributes of Models before deletion.
 
 ## Why?
 
@@ -36,6 +36,12 @@ Copy configuration to config folder:
 $ php artisan vendor:publish --provider=romanzipp\PreviouslyDeleted\Providers\PreviouslyDeletedProvider
 ```
 
+Run the migration:
+
+```
+$ php artisan migrate
+```
+
 ## Usage
 
 This example shows the usage with a User model and stored "username" and "email" attributes.
@@ -58,6 +64,11 @@ class User extends Model
 
 ### Add Validation Rule
 
+The validation rule takes 2 arguments: `not_deleted:{table}[,{attribute}]`
+
+- `table`: The queried table name. In this exmaple: `users`.
+- `attribute`: The model attribute. If not given, the input name will be used.
+
 ```php
 public function store(Request $request)
 {
@@ -73,4 +84,47 @@ public function store(Request $request)
         'password' => bcrypt($request->input('password')),
     ]);
 }
+```
+
+## Extended Usage
+
+### Storing hashed values
+
+When storing personal information you should create hashes to respect your users privacy.
+
+**Store plain-text values**
+
+```php
+protected $storeDeleted = [
+    'username',
+    'email',
+];
+```
+
+With the GDPR (DSGVO) a user has the right to request a full deletion of all personal information, including email address, username etc.
+If you're affected by this, you should make use of hashing algorythms to prevent any harm of privacy.
+
+**Store hashed values**
+
+```php
+protected $storeDeleted = [
+    'username' => 'sha1',
+    'email' => 'md5',
+];
+```
+
+### Storing soft deletes
+
+By default, the package only stores attributes if the model is being force-deleted.
+
+To enable storing attributes even in soft-deletion, set the `ignore_soft_deleted` config value to `false`.
+
+```php
+return [
+
+    // ...
+
+    'ignore_soft_deleted' => false,
+];
+
 ```
