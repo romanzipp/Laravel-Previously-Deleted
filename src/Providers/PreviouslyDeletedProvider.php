@@ -16,7 +16,7 @@ class PreviouslyDeletedProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            dirname(__DIR__) . '/../previously-deleted.php' => config_path('previously-deleted.php'),
+            dirname(__DIR__) . '/../config/previously-deleted.php' => config_path('previously-deleted.php'),
         ], 'config');
 
         $this->loadMigrationsFrom(
@@ -38,7 +38,7 @@ class PreviouslyDeletedProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            dirname(__DIR__) . '/../previously-deleted.php', 'previously-deleted'
+            dirname(__DIR__) . '/../config/previously-deleted.php', 'previously-deleted'
         );
     }
 }
