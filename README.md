@@ -1,5 +1,9 @@
 # Laravel Previously Deleted
 
+[![Latest Stable Version](https://poser.pugx.org/romanzipp/laravel-previously-deleted/version)](https://packagist.org/packages/romanzipp/laravel-previously-deleted)
+[![Total Downloads](https://poser.pugx.org/romanzipp/laravel-previously-deleted/downloads)](https://packagist.org/packages/romanzipp/laravel-previously-deleted)
+[![License](https://poser.pugx.org/romanzipp/laravel-previously-deleted/license)](https://packagist.org/packages/romanzipp/laravel-previously-deleted)
+
 This package stores selected attributes of Models before deletion.
 
 ## Why?
