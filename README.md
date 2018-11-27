@@ -1,8 +1,8 @@
 # Laravel Previously Deleted
 
-[![Latest Stable Version](https://poser.pugx.org/romanzipp/laravel-previously-deleted/version)](https://packagist.org/packages/romanzipp/laravel-previously-deleted)
-[![Total Downloads](https://poser.pugx.org/romanzipp/laravel-previously-deleted/downloads)](https://packagist.org/packages/romanzipp/laravel-previously-deleted)
-[![License](https://poser.pugx.org/romanzipp/laravel-previously-deleted/license)](https://packagist.org/packages/romanzipp/laravel-previously-deleted)
+[![Latest Stable Version](https://img.shields.io/packagist/v/romanzipp/laravel-previously-deleted.svg?style=flat-square)](https://packagist.org/packages/romanzipp/laravel-previously-deleted)
+[![Total Downloads](https://img.shields.io/packagist/dt/romanzipp/laravel-previously-deleted.svg?style=flat-square)](https://packagist.org/packages/romanzipp/laravel-previously-deleted)
+[![License](https://img.shields.io/packagist/l/romanzipp/laravel-previously-deleted.svg?style=flat-square)](https://packagist.org/packages/romanzipp/laravel-previously-deleted)
 
 This package stores selected attributes of Models before deletion.
 
