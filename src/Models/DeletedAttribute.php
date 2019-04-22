@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class DeletedAttribute extends Model
 {
     /**
-     * Fillable attributes
+     * Fillable attributes.
+     *
      * @var array
      */
     protected $fillable = [
@@ -21,14 +22,17 @@ class DeletedAttribute extends Model
     {
         parent::__construct($attributes);
 
-        $this->setTable(config('previously-deleted.table'));
+        $this->setTable(
+            config('previously-deleted.table')
+        );
     }
 
     /**
      * Determine if attribute has been deleted previously.
-     * @param  string $attribute Attribute
-     * @param  string $table     Table name
-     * @param  string $value     Value
+     *
+     * @param  string    $attribute Attribute
+     * @param  string    $table     Table name
+     * @param  string    $value     Value
      * @return boolean
      */
     public static function wasPreviouslyDeleted($attribute, $table, $value): bool
@@ -49,7 +53,8 @@ class DeletedAttribute extends Model
     }
 
     /**
-     * Compare given value against stored value
+     * Compare given value against stored value.
+     *
      * @param  string $value Input value
      * @return bool
      */
@@ -59,7 +64,7 @@ class DeletedAttribute extends Model
             return $value == $this->value;
         }
 
-        if (!function_exists($this->method)) {
+        if ( ! function_exists($this->method)) {
             return false;
         }
 

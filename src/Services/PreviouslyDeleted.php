@@ -2,6 +2,7 @@
 
 namespace romanzipp\PreviouslyDeleted\Services;
 
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use romanzipp\PreviouslyDeleted\Models\DeletedAttribute;
@@ -9,19 +10,22 @@ use romanzipp\PreviouslyDeleted\Models\DeletedAttribute;
 class PreviouslyDeleted
 {
     /**
-     * Subject
+     * Subject.
+     *
      * @var Model
      */
     protected $subject;
 
     /**
-     * Attributes to store
+     * Attributes to store.
+     *
      * @var array
      */
     protected $attributes;
 
     /**
-     * Constructor
+     * Constructor.
+     *
      * @param Model $subject Subject
      */
     public function __construct(Model $subject)
@@ -30,8 +34,10 @@ class PreviouslyDeleted
     }
 
     /**
-     * Set attributes
-     * @param array $attributes Attributes
+     * Set attributes.
+     *
+     * @param  array  $attributes Attributes
+     * @return void
      */
     public function setAttributes(array $attributes): void
     {
@@ -49,16 +55,17 @@ class PreviouslyDeleted
             $value = $this->getAttributeValue($attribute, $method);
 
             DeletedAttribute::create([
-                'table' => $this->getTableName(),
+                'table'     => $this->getTableName(),
                 'attribute' => $attribute,
-                'value' => $value,
-                'method' => $method,
+                'value'     => $value,
+                'method'    => $method,
             ]);
         }
     }
 
     /**
-     * Get parsed attribute to store in previously deleted
+     * Get parsed attribute to store in previously deleted.
+     *
      * @param  string      $attribute Attribute name
      * @param  string|null $method    Used method
      * @return string
@@ -71,8 +78,8 @@ class PreviouslyDeleted
             return $value;
         }
 
-        if (!function_exists($method)) {
-            throw new \Exception('Function "' . $method . '" does not exist');
+        if ( ! function_exists($method)) {
+            throw new Exception('Function "' . $method . '" does not exist');
         }
 
         return call_user_func($method, $value);
@@ -80,14 +87,14 @@ class PreviouslyDeleted
 
     /**
      * Normalize attributes array
-     * @param  array  $attributes Input attributes array
-     * @return array              Normalized array
+     * @param  array $attributes Input attributes array
+     * @return array Normalized array
      */
     protected function normalizeAttributes(array $attributes): array
     {
         $newAttributes = [];
 
-        foreach ((array) $attributes as $key => $value) {
+        foreach ($attributes as $key => $value) {
 
             if (is_integer($key)) {
                 $newAttributes[$value] = null;
@@ -114,6 +121,11 @@ class PreviouslyDeleted
      */
     protected function isSoftDeleting(): bool
     {
-        return array_key_exists(SoftDeletes::class, class_uses(get_class($this->subject)));
+        return array_key_exists(
+            SoftDeletes::class,
+            class_uses(
+                get_class($this->subject)
+            )
+        );
     }
 }

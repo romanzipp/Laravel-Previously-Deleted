@@ -7,7 +7,8 @@ use romanzipp\PreviouslyDeleted\Services\PreviouslyDeleted;
 trait SavePreviouslyDeleted
 {
     /**
-     * Boot trait
+     * Boot trait.
+     *
      * @return void
      */
     protected static function bootSavePreviouslyDeleted(): void
@@ -16,7 +17,7 @@ trait SavePreviouslyDeleted
 
             $ignoreSoftDeletes = config('previously-deleted.ignore_soft_deleted');
 
-            if (!$subject->forceDeleting && $ignoreSoftDeletes) {
+            if ( ! $subject->forceDeleting && $ignoreSoftDeletes) {
                 return;
             }
 
