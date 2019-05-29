@@ -16,6 +16,7 @@ class CreatePreviouslyDeletedAttributesTable extends Migration
         $tableName = config('previously-deleted.table');
 
         Schema::create($tableName, function (Blueprint $table) {
+
             $table->increments('id');
 
             $table->string('table');
