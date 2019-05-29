@@ -8,21 +8,14 @@ This package stores selected attributes of Models before deletion.
 
 ## Why?
 
-> Todo
+If a user requests a deletion of their user data, you are partially required to remove all data related to the user (GDPR).
+With this package, you can store certain attributes & values e.g. to block previously registered usernames oder email adresses.
 
 ## Installation
 
 ```
 composer require romanzipp/laravel-previously-deleted
 ```
-
-Or add `romanzipp/laravel-previously-deleted` to your `composer.json`
-
-```
-"romanzipp/laravel-previously-deleted": "*"
-```
-
-Run composer update to pull the latest version.
 
 **If you use Laravel 5.5+ you are already done, otherwise continue:**
 
