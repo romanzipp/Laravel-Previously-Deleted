@@ -10,9 +10,9 @@ class NotPreviouslyDeleted
     /**
      * Determine if the validation rule passes.
      *
-     * @param  string $name
-     * @param  mixed  $value
-     * @param  array  $parameters
+     * @param string $name
+     * @param mixed $value
+     * @param array $parameters
      * @return bool
      */
     public function validate(string $name, $value, array $parameters): bool
@@ -23,18 +23,18 @@ class NotPreviouslyDeleted
 
         $table = $parameters[0];
 
-        $attribute = count($parameters) == 2 ? $parameters[1] : $name;
+        $attribute = count($parameters) === 2 ? $parameters[1] : $name;
 
-        return DeletedAttribute::wasPreviouslyDeleted($attribute, $table, $value) == false;
+        return DeletedAttribute::wasPreviouslyDeleted($attribute, $table, $value) === false;
     }
 
     /**
      * Get the validation error message.
      *
-     * @param  string   $message
-     * @param  string   $attribute
-     * @param  string   $rule
-     * @param  array    $parameters
+     * @param string $message
+     * @param string $attribute
+     * @param string $rule
+     * @param array $parameters
      * @return string
      */
     public function message($message, $attribute, $rule, $parameters): string

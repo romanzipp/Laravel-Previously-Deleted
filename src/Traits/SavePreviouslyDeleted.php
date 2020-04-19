@@ -4,6 +4,9 @@ namespace romanzipp\PreviouslyDeleted\Traits;
 
 use romanzipp\PreviouslyDeleted\Services\PreviouslyDeleted;
 
+/**
+ * @mixin \Illuminate\Database\Eloquent\Model
+ */
 trait SavePreviouslyDeleted
 {
     /**
@@ -13,7 +16,7 @@ trait SavePreviouslyDeleted
      */
     protected static function bootSavePreviouslyDeleted(): void
     {
-        static::deleting(function ($subject) {
+        static::deleting(static function ($subject) {
 
             $ignoreSoftDeletes = config('previously-deleted.ignore_soft_deleted');
 
