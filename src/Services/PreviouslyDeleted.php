@@ -68,22 +68,26 @@ class PreviouslyDeleted
      * Get parsed attribute to store in previously deleted.
      *
      * @param string $attribute Attribute name
-     * @param string|null $method Used method
+     * @param string|null $algorithm Hashing algorithm
      * @return string
      */
-    protected function getAttributeValue(string $attribute, string $method = null): string
+    protected function getAttributeValue(string $attribute, string $algorithm = null): ?string
     {
         $value = $this->subject->{$attribute};
 
-        if ($method === null) {
+        if ($value === null) {
+            return null;
+        }
+
+        if ($algorithm === null) {
             return $value;
         }
 
-        if ( ! function_exists($method)) {
-            throw new InvalidArgumentException(sprintf('Function %s does not exist', $method));
+        if ( ! function_exists($algorithm)) {
+            throw new InvalidArgumentException(sprintf('Hashing algorithm %s does not exist', $algorithm));
         }
 
-        return $method($value);
+        return $algorithm($value);
     }
 
     /**
@@ -94,18 +98,20 @@ class PreviouslyDeleted
      */
     protected function normalizeAttributes(array $attributes): array
     {
-        $newAttributes = [];
+        $computedAttributes = [];
 
         foreach ($attributes as $key => $value) {
 
             if (is_int($key)) {
-                $newAttributes[$value] = null;
-            } else {
-                $newAttributes[$key] = $value;
+                $computedAttributes[$value] = null;
+                continue;
             }
+
+            // The attribute to be stored on deletion is defined with a hashing algorithm
+            $computedAttributes[$key] = $value;
         }
 
-        return $newAttributes;
+        return $computedAttributes;
     }
 
     /**
