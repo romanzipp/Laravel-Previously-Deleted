@@ -2,9 +2,9 @@
 
 namespace romanzipp\PreviouslyDeleted\Services;
 
-use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use InvalidArgumentException;
 use romanzipp\PreviouslyDeleted\Models\DeletedAttribute;
 
 class PreviouslyDeleted
@@ -36,7 +36,7 @@ class PreviouslyDeleted
     /**
      * Set attributes.
      *
-     * @param  array  $attributes Attributes
+     * @param array $attributes Attributes
      * @return void
      */
     public function setAttributes(array $attributes): void
@@ -45,7 +45,8 @@ class PreviouslyDeleted
     }
 
     /**
-     * Save attributes
+     * Save attributes.
+     *
      * @return void
      */
     public function save(): void
@@ -55,10 +56,10 @@ class PreviouslyDeleted
             $value = $this->getAttributeValue($attribute, $method);
 
             DeletedAttribute::create([
-                'table'     => $this->getTableName(),
+                'table' => $this->getTableName(),
                 'attribute' => $attribute,
-                'value'     => $value,
-                'method'    => $method,
+                'value' => $value,
+                'method' => $method,
             ]);
         }
     }
@@ -66,8 +67,8 @@ class PreviouslyDeleted
     /**
      * Get parsed attribute to store in previously deleted.
      *
-     * @param  string      $attribute Attribute name
-     * @param  string|null $method    Used method
+     * @param string $attribute Attribute name
+     * @param string|null $method Used method
      * @return string
      */
     protected function getAttributeValue(string $attribute, string $method = null): string
@@ -79,15 +80,16 @@ class PreviouslyDeleted
         }
 
         if ( ! function_exists($method)) {
-            throw new Exception('Function "' . $method . '" does not exist');
+            throw new InvalidArgumentException(sprintf('Function %s does not exist', $method));
         }
 
-        return call_user_func($method, $value);
+        return $method($value);
     }
 
     /**
-     * Normalize attributes array
-     * @param  array $attributes Input attributes array
+     * Normalize attributes array.
+     *
+     * @param array $attributes Input attributes array
      * @return array Normalized array
      */
     protected function normalizeAttributes(array $attributes): array
@@ -96,7 +98,7 @@ class PreviouslyDeleted
 
         foreach ($attributes as $key => $value) {
 
-            if (is_integer($key)) {
+            if (is_int($key)) {
                 $newAttributes[$value] = null;
             } else {
                 $newAttributes[$key] = $value;
@@ -107,7 +109,8 @@ class PreviouslyDeleted
     }
 
     /**
-     * Get subject table name
+     * Get subject table name.
+     *
      * @return string
      */
     protected function getTableName(): string
@@ -116,7 +119,8 @@ class PreviouslyDeleted
     }
 
     /**
-     * Subject has soft deletes
+     * Subject has soft deletes.
+     *
      * @return boolean
      */
     protected function isSoftDeleting(): bool

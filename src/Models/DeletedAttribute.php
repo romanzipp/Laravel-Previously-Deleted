@@ -30,9 +30,9 @@ class DeletedAttribute extends Model
     /**
      * Determine if attribute has been deleted previously.
      *
-     * @param  string    $attribute Attribute
-     * @param  string    $table     Table name
-     * @param  string    $value     Value
+     * @param string $attribute Attribute
+     * @param string $table Table name
+     * @param string $value Value
      * @return boolean
      */
     public static function wasPreviouslyDeleted($attribute, $table, $value): bool
@@ -55,7 +55,7 @@ class DeletedAttribute extends Model
     /**
      * Compare given value against stored value.
      *
-     * @param  string $value Input value
+     * @param string $value Input value
      * @return bool
      */
     public function valueEquals($value): bool
