@@ -51,15 +51,19 @@ class PreviouslyDeleted
      */
     public function save(): void
     {
-        foreach ($this->attributes as $attribute => $method) {
+        foreach ($this->attributes as $attribute => $algorithm) {
 
-            $value = $this->getAttributeValue($attribute, $method);
+            $value = $this->getAttributeValue($attribute, $algorithm);
 
-            DeletedAttribute::create([
+            if ($value === null) {
+                continue;
+            }
+
+            DeletedAttribute::query()->create([
                 'table' => $this->getTableName(),
                 'attribute' => $attribute,
                 'value' => $value,
-                'method' => $method,
+                'method' => $algorithm,
             ]);
         }
     }
