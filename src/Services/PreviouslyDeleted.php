@@ -77,12 +77,12 @@ class PreviouslyDeleted
     public function shouldStoreAttributes(): bool
     {
         // Store attributes if the model is not using soft deletion
-        if ( ! property_exists($this->subject, 'forceDeleting')) {
+        if ( ! method_exists($this->subject, 'isForceDeleting')) {
             return true;
         }
 
         // Store attributes if a soft deleting model is being forced to deletion
-        if ($this->subject->forceDeleting) {
+        if ($this->subject->isForceDeleting()) {
             return true;
         }
 
