@@ -108,11 +108,11 @@ class PreviouslyDeleted
             return $value;
         }
 
-        if ( ! function_exists($algorithm)) {
-            throw new InvalidArgumentException(sprintf('Hashing algorithm %s does not exist', $algorithm));
+        if ( ! in_array($algorithm, hash_algos(), false)) {
+            throw new InvalidArgumentException(sprintf('Hashing algorithm "%s" is not available', $algorithm));
         }
 
-        return $algorithm($value);
+        return hash($algorithm, $value);
     }
 
     /**
