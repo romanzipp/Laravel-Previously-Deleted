@@ -69,6 +69,27 @@ class PreviouslyDeleted
     }
 
     /**
+     * Determine if attributes should be store for the given model.
+     * This method also takes soft deletion in consideration.
+     *
+     * @return bool
+     */
+    public function shouldStoreAttributes(): bool
+    {
+        // Do not store attributes if the model is using soft deletion
+        if ( ! property_exists($this->subject, 'forceDeleting')) {
+            return true;
+        }
+
+        // Store attributes if a soft deleting model is being forced to deletion
+        if ($this->subject->forceDeleting) {
+            return true;
+        }
+
+        return config('previously-deleted.ignore_soft_deleted') === false;
+    }
+
+    /**
      * Get parsed attribute to store in previously deleted.
      *
      * @param string $attribute Attribute name

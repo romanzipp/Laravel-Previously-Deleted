@@ -2,6 +2,7 @@
 
 namespace romanzipp\PreviouslyDeleted\Traits;
 
+use Illuminate\Database\Eloquent\Model;
 use romanzipp\PreviouslyDeleted\Services\PreviouslyDeleted;
 
 /**
@@ -16,15 +17,14 @@ trait SavePreviouslyDeleted
      */
     protected static function bootSavePreviouslyDeleted(): void
     {
-        static::deleting(static function ($subject) {
+        static::deleting(static function (Model $subject) {
 
-            $ignoreSoftDeletes = config('previously-deleted.ignore_soft_deleted');
+            $service = new PreviouslyDeleted($subject);
 
-            if ( ! $subject->forceDeleting && $ignoreSoftDeletes) {
+            if ( ! $service->shouldStoreAttributes()) {
                 return;
             }
 
-            $service = new PreviouslyDeleted($subject);
             $service->setAttributes((array) $subject->storeDeleted);
             $service->save();
         });
