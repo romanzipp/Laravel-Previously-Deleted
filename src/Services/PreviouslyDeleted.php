@@ -76,7 +76,7 @@ class PreviouslyDeleted
      */
     public function shouldStoreAttributes(): bool
     {
-        // Do not store attributes if the model is using soft deletion
+        // Store attributes if the model is not using soft deletion
         if ( ! property_exists($this->subject, 'forceDeleting')) {
             return true;
         }
