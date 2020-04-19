@@ -10,6 +10,7 @@ use romanzipp\PreviouslyDeleted\Models\DeletedAttribute;
 use romanzipp\PreviouslyDeleted\Providers\PreviouslyDeletedProvider;
 use romanzipp\PreviouslyDeleted\Tests\Support\DeletingModel;
 use romanzipp\PreviouslyDeleted\Tests\Support\HashedAttributesDeletingModel;
+use romanzipp\PreviouslyDeleted\Tests\Support\HashedAttributesInvalidAlgorithmDeletingModel;
 use romanzipp\PreviouslyDeleted\Tests\Support\SoftDeletingModel;
 
 abstract class TestCase extends BaseTestCase
@@ -76,6 +77,15 @@ abstract class TestCase extends BaseTestCase
                 $table->string('email')->nullable();
                 $table->string('email_sha1')->nullable();
                 $table->string('email_md5')->nullable();
+                $table->timestamps();
+            });
+
+        $app['db']
+            ->connection()
+            ->getSchemaBuilder()
+            ->create((new HashedAttributesInvalidAlgorithmDeletingModel)->getTable(), static function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('email')->nullable();
                 $table->timestamps();
             });
     }

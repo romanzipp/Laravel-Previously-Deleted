@@ -2,7 +2,9 @@
 
 namespace romanzipp\PreviouslyDeleted\Tests;
 
+use InvalidArgumentException;
 use romanzipp\PreviouslyDeleted\Tests\Support\HashedAttributesDeletingModel;
+use romanzipp\PreviouslyDeleted\Tests\Support\HashedAttributesInvalidAlgorithmDeletingModel;
 
 class HashingTest extends TestCase
 {
@@ -37,5 +39,17 @@ class HashingTest extends TestCase
             ['email', 'john@doe.com'],
             ['email_sha1', sha1('john@doe.com')],
         ]);
+    }
+
+    public function testInvalidAlgoritm()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Hashing algorithm "foobar" is not available');
+
+        $model = HashedAttributesInvalidAlgorithmDeletingModel::query()->create([
+            'email' => 'john@doe.com',
+        ]);
+
+        $model->delete();
     }
 }
