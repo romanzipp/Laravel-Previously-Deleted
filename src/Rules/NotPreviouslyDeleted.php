@@ -18,7 +18,7 @@ class NotPreviouslyDeleted
     public function validate(string $name, $value, array $parameters): bool
     {
         if (count($parameters) < 1) {
-            throw new InvalidArgumentException('parameters Attribute must have at least 1 element');
+            throw new InvalidArgumentException('The parameters Attribute must have at least 1 element');
         }
 
         $table = $parameters[0];
