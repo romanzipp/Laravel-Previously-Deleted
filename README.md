@@ -3,13 +3,14 @@
 [![Latest Stable Version](https://img.shields.io/packagist/v/romanzipp/laravel-previously-deleted.svg?style=flat-square)](https://packagist.org/packages/romanzipp/laravel-previously-deleted)
 [![Total Downloads](https://img.shields.io/packagist/dt/romanzipp/laravel-previously-deleted.svg?style=flat-square)](https://packagist.org/packages/romanzipp/laravel-previously-deleted)
 [![License](https://img.shields.io/packagist/l/romanzipp/laravel-previously-deleted.svg?style=flat-square)](https://packagist.org/packages/romanzipp/laravel-previously-deleted)
+[![GitHub Build Status](https://img.shields.io/github/workflow/status/romanzipp/Laravel-Previously-Deleted/Tests?style=flat-square)](https://github.com/romanzipp/Laravel-Previously-Deleted/actions)
 
 This package stores selected attributes of Models before deletion.
 
 ## Why?
 
 If a user requests a deletion of their user data, you are partially required to remove all data related to the user (GDPR).
-With this package, you can store certain attributes & values e.g. to block previously registered usernames oder email adresses.
+With this package, you can store certain attributes & values e.g. to block previously registered usernames oder email addresses.
 
 ## Installation
 
@@ -118,10 +119,12 @@ To enable storing attributes even in soft-deletion, set the `ignore_soft_deleted
 
 ```php
 return [
-
-    // ...
-
     'ignore_soft_deleted' => false,
 ];
+```
 
+## Testing
+
+```shell
+./vendor/bin/phpunit
 ```
