@@ -21,7 +21,7 @@
     },
     "autoload": {
         "psr-4": {
-            "romanzipp\\PreviouslyDeleted\\": "/src"
+            "romanzipp\\PreviouslyDeleted\\": "src"
         }
     },
     "autoload-dev": {
