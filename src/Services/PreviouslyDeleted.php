@@ -52,10 +52,9 @@ class PreviouslyDeleted
     public function save(): void
     {
         foreach ($this->attributes as $attribute => $algorithm) {
-
             $value = $this->getAttributeValue($attribute, $algorithm);
 
-            if ($value === null) {
+            if (null === $value) {
                 continue;
             }
 
@@ -86,7 +85,7 @@ class PreviouslyDeleted
             return true;
         }
 
-        return config('previously-deleted.ignore_soft_deleted') === false;
+        return false === config('previously-deleted.ignore_soft_deleted');
     }
 
     /**
@@ -100,11 +99,11 @@ class PreviouslyDeleted
     {
         $value = $this->subject->{$attribute};
 
-        if ($value === null) {
+        if (null === $value) {
             return null;
         }
 
-        if ($algorithm === null) {
+        if (null === $algorithm) {
             return $value;
         }
 
@@ -126,9 +125,9 @@ class PreviouslyDeleted
         $computedAttributes = [];
 
         foreach ($attributes as $key => $value) {
-
             if (is_int($key)) {
                 $computedAttributes[$value] = null;
+
                 continue;
             }
 
@@ -152,7 +151,7 @@ class PreviouslyDeleted
     /**
      * Subject has soft deletes.
      *
-     * @return boolean
+     * @return bool
      */
     protected function isSoftDeleting(): bool
     {

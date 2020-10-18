@@ -38,7 +38,8 @@ class PreviouslyDeletedProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            dirname(__DIR__) . '/../config/previously-deleted.php', 'previously-deleted'
+            dirname(__DIR__) . '/../config/previously-deleted.php',
+            'previously-deleted'
         );
     }
 }

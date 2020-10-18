@@ -53,7 +53,7 @@ abstract class TestCase extends BaseTestCase
         $app['db']
             ->connection()
             ->getSchemaBuilder()
-            ->create((new DeletingModel)->getTable(), static function (Blueprint $table) {
+            ->create((new DeletingModel())->getTable(), static function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('email')->nullable();
                 $table->timestamps();
@@ -62,7 +62,7 @@ abstract class TestCase extends BaseTestCase
         $app['db']
             ->connection()
             ->getSchemaBuilder()
-            ->create((new SoftDeletingModel)->getTable(), static function (Blueprint $table) {
+            ->create((new SoftDeletingModel())->getTable(), static function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('email')->nullable();
                 $table->softDeletes();
@@ -72,7 +72,7 @@ abstract class TestCase extends BaseTestCase
         $app['db']
             ->connection()
             ->getSchemaBuilder()
-            ->create((new HashedAttributesDeletingModel)->getTable(), static function (Blueprint $table) {
+            ->create((new HashedAttributesDeletingModel())->getTable(), static function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('email')->nullable();
                 $table->string('email_sha1')->nullable();
@@ -83,7 +83,7 @@ abstract class TestCase extends BaseTestCase
         $app['db']
             ->connection()
             ->getSchemaBuilder()
-            ->create((new HashedAttributesInvalidAlgorithmDeletingModel)->getTable(), static function (Blueprint $table) {
+            ->create((new HashedAttributesInvalidAlgorithmDeletingModel())->getTable(), static function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('email')->nullable();
                 $table->timestamps();
