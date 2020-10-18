@@ -15,3 +15,4 @@ composer.lock
 build/*
 .idea/
 .phpunit.result.cache
+.php_cs.cache
