@@ -23,9 +23,9 @@ class NotPreviouslyDeleted
 
         $table = $parameters[0];
 
-        $attribute = count($parameters) === 2 ? $parameters[1] : $name;
+        $attribute = 2 === count($parameters) ? $parameters[1] : $name;
 
-        return DeletedAttribute::wasPreviouslyDeleted($attribute, $table, $value) === false;
+        return false === DeletedAttribute::wasPreviouslyDeleted($attribute, $table, $value);
     }
 
     /**

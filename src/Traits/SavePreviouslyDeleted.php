@@ -18,7 +18,6 @@ trait SavePreviouslyDeleted
     protected static function bootSavePreviouslyDeleted(): void
     {
         static::deleting(static function (Model $subject) {
-
             $service = new PreviouslyDeleted($subject);
 
             if ( ! $service->shouldStoreAttributes()) {

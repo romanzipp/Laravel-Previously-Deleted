@@ -33,7 +33,7 @@ class DeletedAttribute extends Model
      * @param string $attribute Attribute
      * @param string $table Table name
      * @param string $value Value
-     * @return boolean
+     * @return bool
      */
     public static function wasPreviouslyDeleted($attribute, $table, $value): bool
     {
@@ -43,7 +43,6 @@ class DeletedAttribute extends Model
             ->get();
 
         foreach ($deletedItems as $deleted) {
-
             if ($deleted->valueEquals($value)) {
                 return true;
             }
@@ -60,7 +59,7 @@ class DeletedAttribute extends Model
      */
     public function valueEquals($value): bool
     {
-        if ($this->method === null) {
+        if (null === $this->method) {
             return $value == $this->value;
         }
 
