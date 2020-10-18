@@ -37,6 +37,7 @@ class PreviouslyDeleted
      * Set attributes.
      *
      * @param array $attributes Attributes
+     *
      * @return void
      */
     public function setAttributes(array $attributes): void
@@ -93,6 +94,7 @@ class PreviouslyDeleted
      *
      * @param string $attribute Attribute name
      * @param string|null $algorithm Hashing algorithm
+     *
      * @return string
      */
     protected function getAttributeValue(string $attribute, string $algorithm = null): ?string
@@ -118,6 +120,7 @@ class PreviouslyDeleted
      * Normalize attributes array.
      *
      * @param array $attributes Input attributes array
+     *
      * @return array Normalized array
      */
     protected function normalizeAttributes(array $attributes): array

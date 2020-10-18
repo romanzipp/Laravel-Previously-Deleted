@@ -13,6 +13,7 @@ class NotPreviouslyDeleted
      * @param string $name
      * @param mixed $value
      * @param array $parameters
+     *
      * @return bool
      */
     public function validate(string $name, $value, array $parameters): bool
@@ -35,6 +36,7 @@ class NotPreviouslyDeleted
      * @param string $attribute
      * @param string $rule
      * @param array $parameters
+     *
      * @return string
      */
     public function message($message, $attribute, $rule, $parameters): string
