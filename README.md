@@ -84,6 +84,18 @@ public function store(Request $request)
 }
 ```
 
+You can also use a rule instance:
+
+```php
+use romanzipp\PreviouslyDeleted\Rules\NotPreviouslyDeleted;
+
+$request->validate([
+    'name' => ['required', new NotPreviouslyDeleted(User::class, 'username')],
+    'email' => ['required', new NotPreviouslyDeleted(User::class)],
+    'password' => ['required', 'min:6']
+]);
+```
+
 ## Extended Usage
 
 ### Storing hashed values

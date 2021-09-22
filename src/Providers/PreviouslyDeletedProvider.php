@@ -23,11 +23,11 @@ class PreviouslyDeletedProvider extends ServiceProvider
             dirname(__DIR__) . '/../migrations'
         );
 
-        Validator::extend('not_previously_deleted', NotPreviouslyDeleted::class . '@validate');
-        Validator::replacer('not_previously_deleted', NotPreviouslyDeleted::class . '@message');
+        Validator::extend('not_previously_deleted', $callback = function ($attribute, $value, $parameters) {
+            return new NotPreviouslyDeleted(...$parameters);
+        });
 
-        Validator::extend('not_deleted', NotPreviouslyDeleted::class . '@validate');
-        Validator::replacer('not_deleted', NotPreviouslyDeleted::class . '@message');
+        Validator::extend('not_deleted', $callback);
     }
 
     /**

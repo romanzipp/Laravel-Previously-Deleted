@@ -3,6 +3,7 @@
 namespace romanzipp\PreviouslyDeleted\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use InvalidArgumentException;
 
 class DeletedAttribute extends Model
 {
@@ -44,6 +45,9 @@ class DeletedAttribute extends Model
             ->get();
 
         foreach ($deletedItems as $deleted) {
+            /**
+             * @var \romanzipp\PreviouslyDeleted\Models\DeletedAttribute $deleted
+             */
             if ($deleted->valueEquals($value)) {
                 return true;
             }
@@ -65,12 +69,10 @@ class DeletedAttribute extends Model
             return $value == $this->value;
         }
 
-        if ( ! function_exists($this->method)) {
-            return false;
+        if ( ! in_array($this->method, hash_algos(), false)) {
+            throw new InvalidArgumentException(sprintf('Hashing algorithm "%s" is not available', $this->method));
         }
 
-        $value = call_user_func($this->method, $value);
-
-        return $value == $this->value;
+        return hash($this->method, $value) == $this->value;
     }
 }
