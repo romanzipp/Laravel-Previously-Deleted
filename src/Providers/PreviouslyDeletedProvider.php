@@ -25,9 +25,9 @@ class PreviouslyDeletedProvider extends ServiceProvider
 
         Validator::extend('not_previously_deleted', $callback = function ($attribute, $value, $parameters) {
             return (new NotPreviouslyDeleted(...$parameters))->passes($attribute, $value);
-        });
+        }, config('previously-deleted.failed_message'));
 
-        Validator::extend('not_deleted', $callback);
+        Validator::extend('not_deleted', $callback, config('previously-deleted.failed_message'));
     }
 
     /**
