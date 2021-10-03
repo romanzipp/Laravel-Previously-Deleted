@@ -19,7 +19,7 @@ class PreviouslyDeleted
     /**
      * Attributes to store.
      *
-     * @var array
+     * @var array<string, string|null>
      */
     protected $attributes;
 
@@ -36,7 +36,7 @@ class PreviouslyDeleted
     /**
      * Set attributes.
      *
-     * @param array $attributes Attributes
+     * @param array<string, string|null> $attributes Attributes
      *
      * @return void
      */
@@ -119,9 +119,9 @@ class PreviouslyDeleted
     /**
      * Normalize attributes array.
      *
-     * @param array $attributes Input attributes array
+     * @param array<string|int, string|null> $attributes Input attributes array
      *
-     * @return array Normalized array
+     * @return array<string, string|null> Normalized array
      */
     protected function normalizeAttributes(array $attributes): array
     {

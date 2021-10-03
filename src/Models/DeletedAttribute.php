@@ -5,12 +5,18 @@ namespace romanzipp\PreviouslyDeleted\Models;
 use Illuminate\Database\Eloquent\Model;
 use InvalidArgumentException;
 
+/**
+ * @property string $method
+ * @property string $value
+ * @property string $attribute
+ * @property string $table
+ */
 class DeletedAttribute extends Model
 {
     /**
      * Fillable attributes.
      *
-     * @var array
+     * @var string[]
      */
     protected $fillable = [
         'table',
@@ -19,6 +25,9 @@ class DeletedAttribute extends Model
         'method',
     ];
 
+    /**
+     * @param string[] $attributes
+     */
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
