@@ -3,7 +3,7 @@
 [![Latest Stable Version](https://img.shields.io/packagist/v/romanzipp/laravel-previously-deleted.svg?style=flat-square)](https://packagist.org/packages/romanzipp/laravel-previously-deleted)
 [![Total Downloads](https://img.shields.io/packagist/dt/romanzipp/laravel-previously-deleted.svg?style=flat-square)](https://packagist.org/packages/romanzipp/laravel-previously-deleted)
 [![License](https://img.shields.io/packagist/l/romanzipp/laravel-previously-deleted.svg?style=flat-square)](https://packagist.org/packages/romanzipp/laravel-previously-deleted)
-[![GitHub Build Status](https://img.shields.io/github/workflow/status/romanzipp/Laravel-Previously-Deleted/Tests?style=flat-square)](https://github.com/romanzipp/Laravel-Previously-Deleted/actions)
+[![GitHub Build Status](https://img.shields.io/github/actions/workflow/status/romanzipp/Laravel-Previously-Deleted/tests.yml?branch=master&label=tests&style=flat-square)](https://github.com/romanzipp/Laravel-Previously-Deleted/actions)
 
 This package stores selected attributes of Models before deletion.
 
