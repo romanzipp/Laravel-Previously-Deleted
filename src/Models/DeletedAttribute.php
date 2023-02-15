@@ -3,7 +3,6 @@
 namespace romanzipp\PreviouslyDeleted\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use InvalidArgumentException;
 
 /**
  * @property string $method
@@ -79,7 +78,7 @@ class DeletedAttribute extends Model
         }
 
         if ( ! in_array($this->method, hash_algos(), false)) {
-            throw new InvalidArgumentException(sprintf('Hashing algorithm "%s" is not available', $this->method));
+            throw new \InvalidArgumentException(sprintf('Hashing algorithm "%s" is not available', $this->method));
         }
 
         return hash($this->method, $value) == $this->value;

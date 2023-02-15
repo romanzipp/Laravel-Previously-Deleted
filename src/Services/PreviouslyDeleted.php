@@ -4,7 +4,6 @@ namespace romanzipp\PreviouslyDeleted\Services;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use InvalidArgumentException;
 use romanzipp\PreviouslyDeleted\Models\DeletedAttribute;
 
 class PreviouslyDeleted
@@ -110,7 +109,7 @@ class PreviouslyDeleted
         }
 
         if ( ! in_array($algorithm, hash_algos(), false)) {
-            throw new InvalidArgumentException(sprintf('Hashing algorithm "%s" is not available', $algorithm));
+            throw new \InvalidArgumentException(sprintf('Hashing algorithm "%s" is not available', $algorithm));
         }
 
         return hash($algorithm, $value);
