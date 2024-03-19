@@ -54,7 +54,7 @@ class DeletedAttribute extends Model
 
         foreach ($deletedItems as $deleted) {
             /**
-             * @var \romanzipp\PreviouslyDeleted\Models\DeletedAttribute $deleted
+             * @var DeletedAttribute $deleted
              */
             if ($deleted->valueEquals($value)) {
                 return true;

@@ -96,7 +96,7 @@ class PreviouslyDeleted
      *
      * @return string
      */
-    protected function getAttributeValue(string $attribute, string $algorithm = null): ?string
+    protected function getAttributeValue(string $attribute, ?string $algorithm = null): ?string
     {
         $value = $this->subject->{$attribute};
 
