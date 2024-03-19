@@ -12,11 +12,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class DeletedAttribute extends Model
 {
-    /**
-     * Fillable attributes.
-     *
-     * @var string[]
-     */
     protected $fillable = [
         'table',
         'attribute',
