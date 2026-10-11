@@ -5,7 +5,7 @@ namespace romanzipp\PreviouslyDeleted\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property string $method
+ * @property string|null $method
  * @property string $value
  * @property string $attribute
  * @property string $table
